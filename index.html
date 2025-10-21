@@ -45,12 +45,31 @@ body { font-family: 'Poppins', sans-serif; color:#fff; overflow-x:hidden; scroll
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
+/* Center the menu items in the toggle (mobile) view */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    text-align: center;
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centers horizontally */
+    justify-content: flex-start; /* keeps from pushing last items down */
+    height: auto; /* allows natural height */
+    padding: 20px 0;
+  }
+
+  .navbar-nav .nav-item {
+    margin: 10px 0;
+  }
+}
+
+
   /* Hero Section */
-  .hero { position: relative; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; overflow:hidden; }
+  .hero { position: relative; height:70vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; overflow:hidden; }
   canvas { position:absolute; top:0; left:0; width:100%; height:100%; display:block; }
-  #stars { z-index:0; }
-  #orbit { z-index:1; }
-  #energy { z-index:2; }
+
   .globe { position:absolute; width:350px; height:350px; border-radius:50%; background:radial-gradient(circle at 30% 30%, #1e90ff, #000); box-shadow:0 0 60px 25px rgba(0,150,255,0.4); animation: rotateGlow 20s infinite linear; z-index:3; }
   @keyframes rotateGlow { 0% { transform:rotate(0deg) scale(1); filter:hue-rotate(0deg); } 50% { transform:rotate(180deg) scale(1.05); filter:hue-rotate(90deg); } 100% { transform:rotate(360deg) scale(1); filter:hue-rotate(0deg); } }
   .content { z-index:4; }
@@ -66,14 +85,66 @@ body { font-family: 'Poppins', sans-serif; color:#fff; overflow-x:hidden; scroll
 .rotating-text span { position:absolute; left:0; top:50%; transform:translateY(-50%); opacity:0; animation:fadeText 6s linear infinite; line-height:1.2em; }
 .rotating-text span:nth-child(1){animation-delay:0s;} .rotating-text span:nth-child(2){animation-delay:2s;} .rotating-text span:nth-child(3){animation-delay:4s;}
 @keyframes fadeText { 0%,10%{opacity:0;} 10%,30%{opacity:1;} 30%,40%{opacity:0;} 100%{opacity:0;} }
-
 /* Sections */
-section { padding:80px 0; }
-h2 { font-weight:700; color:#fff; text-align:center; margin-bottom:40px; }
+section {
+  padding: 60px 0; /* reduced section padding */
+}
 
-/* Service Cards */
-.service-card { background: rgba(255,255,255,0.08); border-radius:15px; padding:25px; color:#fff; backdrop-filter: blur(12px); transition:all 0.4s; text-shadow:0 0 5px rgba(255,255,255,0.7); }
-.service-card:hover { transform: translateY(-8px); box-shadow:0 0 25px rgba(99,102,241,0.6); text-shadow:0 0 10px rgba(255,255,255,0.9); }
+h2 {
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+/* -------------------- */
+/* Service Cards Styles */
+/* -------------------- */
+.service-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  padding: 18px 16px; /* tighter padding */
+  color: #fff;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s ease;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%; /* allow natural height */
+  text-align: center;
+}
+
+/* Hover Effect */
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+}
+
+/* Headings */
+.service-card h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #FFD700;
+  margin-bottom: 10px;
+  line-height: 1.3;
+  
+}
+
+/* Paragraphs */
+.service-card p {
+  font-size: 0.9rem;
+  color: #ccc;
+  line-height: 1.45;
+  margin-bottom: 6px; /* reduced space between paragraphs */
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  section { padding: 50px 0; }
+  .service-card { height: auto; }
+}
 
 /* Footer */
 .footer { background:#0f172a; padding:40px 0; text-align:center; color:#9ca3af; }
@@ -123,6 +194,91 @@ h2 { font-weight:700; color:#fff; text-align:center; margin-bottom:40px; }
 .client-card:hover img {
   transform: scale(1.1);
 }
+
+.corner-quote {
+  position: absolute;
+  color: #c0c0bd;
+  font-weight: 800;
+  font-size: 3rem;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 8px rgba(255,215,0,0.7);
+  transition: all 0.5s ease;
+}
+
+/* Corners */
+.corner-quote.top-left { top: 30px; left: 30px; }
+.corner-quote.top-right { top: 30px; right: 30px; }
+.corner-quote.bottom-left { bottom: 20px; left: 20px; }
+.corner-quote.bottom-right { bottom: 20px; right: 20px; }
+
+/* Responsive for Mobile */
+@media (max-width: 768px) {
+  .corner-quote {
+    font-size: 1.5rem;
+    text-shadow: 0 0 5px rgba(255,215,0,0.7);
+  }
+  .corner-quote.top-left { top: 15px; left: 15px; }
+  .corner-quote.top-right { top: 15px; right: 15px; }
+  .corner-quote.bottom-left { bottom: 10px; left: 10px; }
+  .corner-quote.bottom-right { bottom: 10px; right: 10px; }
+}
+
+
+</style>
+<style>
+/* Modal Overlay */
+.modules-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: opacity 0.3s ease;
+}
+
+/* Modal Box */
+.modules-content {
+  background: rgba(255,255,255,0.08);
+  border-radius: 15px;
+  padding: 30px;
+  color: #fff;
+  max-width: 900px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: fadeInUp 0.4s ease;
+  position: relative;
+}
+
+/* Close Button Fixed */
+.close-btn {
+  position: fixed; /* Changed from absolute */
+  top: 20px;
+  right: 20px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #FFD700;
+  z-index: 10000; /* Above modal content */
+  transition: 0.3s;
+}
+
+.close-btn:hover { color: #fff; }
+
+/* Fade Animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 576px) {
+  .modules-content { padding: 20px; }
+}
 </style>
 </head>
 <body id="top">
@@ -141,10 +297,12 @@ h2 { font-weight:700; color:#fff; text-align:center; margin-bottom:40px; }
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
         <li class="nav-item"><a class="nav-link" href="#modules">ERP Modules</a></li>
         <li class="nav-item"><a class="nav-link" href="#web-development">Web Development</a></li>
+        <li class="nav-item"><a class="nav-link" href="#seo-optimization">SEO</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -154,37 +312,60 @@ h2 { font-weight:700; color:#fff; text-align:center; margin-bottom:40px; }
 <!-- Scroll Indicator -->
 
 <!-- Hero Section -->
-<section class="hero">
-  <canvas id="stars"></canvas>
-  <canvas id="orbit"></canvas>
-  <canvas id="energy"></canvas>
+<section id="home" class="hero">
   <div class="globe"></div>
   <div class="content">
     <h1>ThinkSphere</h1>
     <p id="animated-title">Modernizing</p>
  
   </div>
+  <!-- Corner Quotes -->
+  <div class="corner-quote top-left"></div>
+  <div class="corner-quote top-right"></div>
+  <div class="corner-quote bottom-left"></div>
+  <div class="corner-quote bottom-right"></div>
 </section>
 
 <!-- About, Services, ERP Modules, Web Dev, Contact, Footer -->
 <!-- Copy all your section content from your previous code here -->
 
-<!-- About -->
-<!-- About -->
 <section id="about" class="section">
   <div class="container">
-    <h2>About ThinkSphere</h2>
-    <p class="lead text-center">
-      ThinkSphere delivers comprehensive ERP and digital transformation solutions for schools, hospitals, and businesses, enabling them to modernize operations efficiently and effectively.
+    <h2 class="text-center mb-4">About ThinkSphere</h2>
+
+    <p class="lead text-center mx-auto mb-5" style="max-width: 800px; color: #ddd;">
+      ThinkSphere is a comprehensive <strong>Digital Growth Agency</strong> and <strong>ERP Solutions Provider</strong>. We deliver the technology foundation—from core operational efficiency to powerful online presence—that enables schools, hospitals, and businesses to thrive in the digital era.
     </p>
-    <ul class="about-points" style="max-width:700px; margin:30px auto; list-style: disc; padding-left:20px; color:#fff; font-size:16px; line-height:1.8;">
-      <li>Streamline administrative, academic, and financial workflows for educational institutions.</li>
-      <li>Modernize hospital operations including patient management, appointments, billing, and inventory.</li>
-      <li>Provide secure and scalable cloud migration services for improved accessibility and data management.</li>
-      <li>Implement tailored digital solutions to enhance efficiency and reduce manual effort.</li>
-      <li>Offer ongoing support and maintenance to ensure smooth and uninterrupted operations.</li>
-      <li>Empower organizations to adopt technology-driven growth and future-ready processes.</li>
-    </ul>
+
+    <div class="row justify-content-center mb-5" style="max-width: 900px; margin: 0 auto; color: #fff; font-size: 16px;">
+      
+      <div class="col-lg-6 mb-4">
+        <h4 class="mb-3" style="color: #6366f1; font-weight: 700; border-bottom: 2px solid #6366f1; padding-bottom: 5px;">
+          Operational Modernization
+        </h4>
+        <ul class="about-points" style="list-style: disc; padding-left: 20px; line-height: 1.8;">
+          <li><strong>ERP Solutions:</strong> Streamlining administrative, academic, and financial workflows for institutions.</li>
+          <li><strong>Digital Transformation:</strong> Modernizing hospital operations, patient management, and billing systems.</li>
+          <li><strong>Cloud Migration:</strong> Providing secure, scalable cloud services for improved accessibility and data management.</li>
+        </ul>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+        <h4 class="mb-3" style="color: #FFD700; font-weight: 700; border-bottom: 2px solid #FFD700; padding-bottom: 5px;">
+          Digital Presence & Growth
+        </h4>
+        <ul class="about-points" style="list-style: disc; padding-left: 20px; line-height: 1.8;">
+          <li><strong>Website Development:</strong> Custom, high-performance websites built for conversion and modern UX.</li>
+          <li><strong>SEO Optimization:</strong> Strategic search engine optimization to boost visibility and organic traffic.</li>
+          <li><strong>Website Maintenance:</strong> Proactive support, security, and updates to ensure flawless, uninterrupted operation.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="text-center font-weight-bold" style="color: #ddd;">
+      We are committed to being your single, reliable partner for both internal efficiency and external market growth.
+    </p>
   </div>
 </section>
 
@@ -193,166 +374,122 @@ h2 { font-weight:700; color:#fff; text-align:center; margin-bottom:40px; }
 <!-- Services -->
 <section id="services" class="section">
   <div class="container">
-    <h2>Our Services</h2>
+    <h2 class="text-center mb-5">We Provide</h2>
     <div class="row g-4">
-      <div class="col-md-4">
-        <div class="service-card text-center">
-          <h5>ERP Solutions</h5>
-          <p>Attendance, fees, exams & communication in one platform.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="service-card text-center">
-          <h5>Website Development</h5>
-          <p>Modern responsive websites for schools & businesses.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="service-card text-center">
-          <h5>Business Solutions</h5>
-          <p>Custom solutions to simplify growth & administration.</p>
-        </div>
-      </div>
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="0">
+  <div class="service-card">
+    <h5>FullStack Web Development</h5>
+    <p>Modern responsive websites for schools & businesses.</p>
+    <p>We build fast, SEO-optimized websites with clean code...</p>
+  </div>
+</div>
+
+<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+  <div class="service-card">
+    <h5>Business Solutions</h5>
+    <p>Custom solutions to simplify growth & administration.</p>
+    <p>Our business solutions streamline operations...</p>
+  </div>
+</div>
+
+<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+  <div class="service-card">
+    <h5>ERP Solutions</h5>
+    <p>Attendance, fees, exams & communication in one platform.</p>
+    <p>Our ERP solutions optimize institutional management...</p>
+  </div>
+</div>
+
+<div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+  <div class="service-card">
+    <h5>SEO Optimization</h5>
+    <p>Boost your online visibility and attract more users.</p>
+    <p>We implement on-page and off-page SEO strategies...</p>
+  </div>
+</div>
+
     </div>
   </div>
 </section>
 <h2>ERP Modules</h2>
 <p class="text-center mb-4">Comprehensive features to manage schools efficiently.</p>
+
 <div class="text-center mb-5">
-  <button id="showModulesBtn" class="btn btn-warning px-4 py-2 fw-semibold" style="border-radius:10px; color:#000; background:linear-gradient(45deg,#FFB347,#FFD700); border:none;">
+  <button id="showModulesBtn" class="btn btn-warning px-4 py-2 fw-semibold"
+    style="border-radius:10px; color:#000; background:linear-gradient(45deg,#FFB347,#FFD700); border:none;">
     Explore All ERP Modules
   </button>
 </div>
 
-<!-- ERP Modules (Initially Hidden) -->
-<div id="modules-list" class="row g-4" style="display: none;">
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Attendance</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Results / Exam Scores</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Fees Management</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Events Management</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Principal Dashboard</h5>
-      <small>(Performance Overview of Students and Teachers)</small>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Students Dashboard</h5>
-      <small>(Performance Overview)</small>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Top 3 Rankers per Class</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Parent Communication</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Timetable / Period Management</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Transport / Bus Management</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Custom Reports & Analytics</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Extra-Curricular / Sports Tracking</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Digital Certificates / Awards</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Events & Stories Page</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">School Calendar</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Employee Attendance</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Weekly Quizzes</h5>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="service-card text-center" style="height:120px;">
-      <h5 class="mt-4">Library Management</h5>
+
+<!-- Popup Modal -->
+<div id="modulesModal" class="modules-modal">
+  <div class="modules-content">
+    <span id="closeModules" class="close-btn">&times;</span>
+    <h3 class="text-center mb-4">All ERP Modules</h3>
+    <div class="row g-3">
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Attendance</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Results / Exam Scores</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Fees Management</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Events Management</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Principle Dashboard</h5><small>(Performance Overview of Students and Teachers)</small></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Students Dashboard</h5><small>(Performance Overview)</small></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Top 3 Rankers per Class</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Parent Communication</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Timetable / Period Management</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Transport / Bus Management</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Custom Reports & Analytics</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Extra-Curricular / Sports Tracking</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Digital Certificates / Awards</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Events & Stories Page</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>School Calendar</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Employee Attendance</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Weekly Quizzes</h5></div></div>
+      <div class="col-md-4 col-sm-6"><div class="service-card text-center" style="height:120px;"><h5>Library Management</h5></div></div>
     </div>
   </div>
 </div>
 
-<!-- Script to Show Modules on Button Click -->
+
+
+
 
 
 
 <!-- Special Features -->
-<section id="special-features" class="section">
+<section id="special-features" class="section" style="padding:60px 0;">
   <div class="container">
-    <h2>Why ThinkSphere ERP Stands Out</h2>
-    <p class="text-center mb-5">Automatic notifications & reminders keep parents engaged while simplifying school management.</p>
-    <div class="row g-4">
-      <div class="col-lg-3 col-md-6 col-12" data-aos="fade-up">
-        <div class="service-card text-center" style="height:220px;">
-          <h5>Instant Attendance Alerts</h5>
-          <p>Automatic real-time notifications to parents for student attendance.</p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-12" data-aos="fade-up">
-        <div class="service-card text-center" style="height:220px;">
-          <h5>Automated Performance Updates</h5>
-          <p>Parents receive timely notifications about exam scores and report cards.</p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-12" data-aos="fade-up">
-        <div class="service-card text-center" style="height:220px;">
+    <h2 class="text-center mb-3" style="color:#fff; font-weight:700;">Why ThinkSphere ERP Stands Out</h2>
+    <p class="text-center mb-5" style="color:#bbb; max-width:700px; margin:auto;">
+      Automatic notifications & reminders keep parents engaged while simplifying school management.
+    </p>
 
-          <h5>Smart Fee Reminders</h5>
-          <p>Automated monthly reminders for pending fees to parents.</p>
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-3 col-md-6 col-12" data-aos="fade-up">
+        <div class="service-card text-center">
+          <h5>Instant Attendance Alerts</h5>
+          <p>Real-time notifications instantly inform parents when their child is marked absent.</p>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 col-12" data-aos="fade-up">
-        <div class="service-card text-center" style="height:220px;">
+
+      <div class="col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-card text-center">
+          <h5>Automated Performance Updates</h5>
+          <p>Parents get automatic updates about marks, exam results, and report cards.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-card text-center">
+          <h5>Smart Fee Reminders</h5>
+          <p>Timely alerts remind parents about pending or upcoming fee payments.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="300">
+        <div class="service-card text-center">
           <h5>Affordable Pricing Model</h5>
-          <p>Just ₹10 per student per month for complete ERP solutions.</p>
+          <p>Just ₹10 per student per month — complete, budget-friendly ERP solution.</p>
         </div>
       </div>
     </div>
@@ -360,36 +497,125 @@ h2 { font-weight:700; color:#fff; text-align:center; margin-bottom:40px; }
 </section>
 
 <!-- Web Development -->
-<section id="web-development" class="section">
-  <div class="container">
-    <h2>Web Development Services</h2>
-    <div class="row g-4">
+<section id="web-development" class="section" style="padding:80px 0;">
+  <div class="container text-center">
+    <h2 style="color:#fff; font-weight:700; margin-bottom:50px;">
+      Web Development Services
+    </h2>
+
+    <div class="row g-4 justify-content-center">
+      
       <div class="col-md-4" data-aos="fade-up">
-        <div class="service-card text-center" style="height:220px;">
-          <img src="https://img.icons8.com/color/48/000000/school.png" class="feature-icon mb-3">
+        <div class="service-card p-4">
+          <div class="icon-wrapper mb-3">
+            <img src="https://img.icons8.com/color/96/school.png" alt="School" />
+          </div>
           <h5>Schools</h5>
-          <p>Domain management, hosting, and student portals.</p>
+          <p>Modern school websites with student portals, hosting, and domain management for seamless online operations.</p>
         </div>
       </div>
-      <div class="col-md-4" data-aos="fade-up">
-        <div class="service-card text-center" style="height:220px;">
-          <img src="https://img.icons8.com/color/48/000000/business.png" class="feature-icon mb-3">
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-card p-4">
+          <div class="icon-wrapper mb-3">
+            <img src="https://img.icons8.com/color/96/business.png" alt="Business" />
+          </div>
           <h5>Businesses</h5>
-          <p>Professional websites highlighting your brand & services.</p>
+          <p>Responsive websites that showcase your brand, build credibility, and attract potential clients effectively.</p>
         </div>
       </div>
-      <div class="col-md-4" data-aos="fade-up">
-        <div class="service-card text-center" style="height:220px;">
-          <img src="https://img.icons8.com/color/48/000000/t-shirt.png" class="feature-icon mb-3">
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-card p-4">
+          <div class="icon-wrapper mb-3">
+            <img src="https://img.icons8.com/color/96/t-shirt.png" alt="E-commerce" />
+          </div>
           <h5>E-commerce Stores</h5>
-          <p>Online ordering, product showcase, and secure payment options.</p>
+          <p>Engaging online stores with product showcases, order tracking, and secure payment integrations.</p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
+
+<!-- SEO Optimization -->
+<section id="seo-optimization" class="section" style="padding:80px 0;">
+  <div class="container text-center">
+    <h2 style="color:#fff; font-weight:700; margin-bottom:50px;">
+      SEO Optimization Services
+    </h2>
+
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="service-card p-4">
+          <div class="icon-wrapper mb-3">
+            <img src="https://img.icons8.com/color/96/seo.png" alt="On-Page SEO" />
+          </div>
+          <h5>On-Page SEO</h5>
+          <p>Optimize meta tags, headings, URLs, and content structure to ensure your pages rank higher on search engines.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-card p-4">
+          <div class="icon-wrapper mb-3">
+            <img src="https://img.icons8.com/color/96/link.png" alt="Off-Page SEO" />
+          </div>
+          <h5>Off-Page SEO</h5>
+          <p>Boost your site authority with high-quality backlinks, social signals, and content promotion strategies.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-card p-4">
+          <div class="icon-wrapper mb-3">
+            <img src="technical_seo.png" alt="Technical SEO" style="width: 80px; height: 80px;;" />
+
+          </div>
+          <h5>Technical SEO</h5>
+          <p>Enhance site performance with faster load times, mobile optimization, schema markup, and crawl efficiency.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="service-card p-4">
+          <div class="icon-wrapper mb-3">
+            <img src="https://img.icons8.com/color/96/analytics.png" alt="Local SEO" />
+          </div>
+          <h5>Local SEO</h5>
+          <p>Get discovered locally through optimized Google My Business profiles and location-based keyword targeting.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="service-card p-4">
+          <div class="icon-wrapper mb-3">
+            <img src="https://img.icons8.com/color/96/increase.png" alt="Keyword Research" />
+          </div>
+          <h5>Keyword Research</h5>
+          <p>Identify high-impact keywords that drive quality traffic and improve your ranking in search results.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+        <div class="service-card p-4">
+          <div class="icon-wrapper mb-3">
+            <img src="https://img.icons8.com/color/96/combo-chart.png" alt="Analytics & Reporting" />
+          </div>
+          <h5>Analytics & Reporting</h5>
+          <p>Track your SEO performance with detailed analytics, ranking reports, and actionable insights.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 <!-- Happy Clients -->
-<section id="clients" class="section" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(12px);">
+<section id="clients" class="section">
   <div class="container">
     <h2 class="text-center mb-5">Our Happy Clients</h2>
     <div class="row g-4 justify-content-center">
@@ -415,18 +641,44 @@ h2 { font-weight:700; color:#fff; text-align:center; margin-bottom:40px; }
 
 
 
-<!-- Contact -->
-<section id="contact" class="section">
-  <div class="container">
-    <h2>Contact Us</h2>
-    <form class="mx-auto" style="max-width:500px;">
-      <input type="text" class="form-control mb-3" placeholder="Your Name">
-      <input type="email" class="form-control mb-3" placeholder="Email">
-      <textarea class="form-control mb-3" rows="4" placeholder="Message"></textarea>
-      <button type="submit" class="btn-glow w-100">Send Message</button>
+<!-- 🌟 Contact Section -->
+<section id="contact" class="section" style="padding:80px 0; background:linear-gradient(135deg,#0a0a0a,#1a1a1a); color:#fff;">
+  <div class="container text-center">
+    <h2 style="font-weight:700; color:#FFD700; margin-bottom:20px;">Contact Us</h2>
+    <p style="color:#ccc; margin-bottom:50px;">Have a question or want to work with us? Drop us a message below.</p>
+
+    <form class="mx-auto" style="max-width:500px; background:#111; padding:30px; border-radius:15px; box-shadow:0 0 20px rgba(255,215,0,0.2);">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Your Name" 
+               style="background:#1c1c1c; border:none; border-radius:10px; color:#fff; padding:12px 15px; outline:none;">
+      </div>
+      <div class="mb-3">
+        <input type="email" class="form-control" placeholder="Email" 
+               style="background:#1c1c1c; border:none; border-radius:10px; color:#fff; padding:12px 15px; outline:none;">
+      </div>
+      <div class="mb-4">
+        <textarea class="form-control" rows="4" placeholder="Message"
+                  style="background:#1c1c1c; border:none; border-radius:10px; color:#fff; padding:12px 15px; outline:none;"></textarea>
+      </div>
+      <button type="submit" class="btn-glow w-100"
+              style="background:linear-gradient(45deg,#FFD700,#FFB347); color:#000; font-weight:600; border:none; border-radius:10px; padding:12px; transition:0.3s;">
+        Send Message
+      </button>
     </form>
   </div>
 </section>
+
+<!-- ✨ Optional Glow Button Effect -->
+<style>
+.btn-glow:hover {
+  box-shadow: 0 0 15px rgba(255,215,0,0.6);
+  transform: translateY(-2px);
+}
+.form-control::placeholder {
+  color: #aaa;
+}
+</style>
+
 
 <!-- Footer -->
 <footer class="footer">
@@ -449,137 +701,136 @@ h2 { font-weight:700; color:#fff; text-align:center; margin-bottom:40px; }
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/TextPlugin.min.js"></script>
-<script>
-gsap.registerPlugin(TextPlugin);
-
-// Animated titles
-const titles = ["Modernizing", "Schools", "Businesses", "Ecommerce"];
-let tl = gsap.timeline({ repeat:-1, repeatDelay:1 });
-titles.forEach(title=>{
-  tl.to("#animated-title",{duration:1.5,text:title,ease:"power1.inOut"})
-    .to("#animated-title",{duration:0.5,opacity:0,ease:"power1.inOut"})
-    .to("#animated-title",{duration:0.1,opacity:1});
-});
-
-
-// Starfield
-const starCanvas = document.getElementById("stars");
-const sctx = starCanvas.getContext("2d");
-let stars=[];
-function createStars(){ stars=[]; for(let i=0;i<500;i++){ stars.push({x:Math.random()*starCanvas.width, y:Math.random()*starCanvas.height, z:Math.random()*starCanvas.width}); }}
-function resizeStars(){ starCanvas.width=window.innerWidth; starCanvas.height=window.innerHeight; createStars(); }
-window.addEventListener("resize",resizeStars);
-resizeStars();
-function drawStars(){ sctx.fillStyle="black"; sctx.fillRect(0,0,starCanvas.width,starCanvas.height); sctx.fillStyle="white"; stars.forEach(s=>{ s.z-=2;if(s.z<=0)s.z=starCanvas.width;let k=128/s.z; let px=s.x*k+starCanvas.width/2; let py=s.y*k+starCanvas.height/2; if(px>=0&&px<=starCanvas.width&&py>=0&&py<=starCanvas.height){ let size=(1-s.z/starCanvas.width)*2.5; sctx.beginPath(); sctx.arc(px,py,size,0,Math.PI*2); sctx.fill(); } }); requestAnimationFrame(drawStars);}
-drawStars();
-
-// Orbit
-const orbitCanvas = document.getElementById("orbit");
-const octx = orbitCanvas.getContext("2d");
-let orbitParticles=[];
-function createOrbit(){ orbitParticles=[]; for(let i=0;i<50;i++){ orbitParticles.push({angle:Math.random()*Math.PI*2,radius:200+Math.random()*50,speed:0.01+Math.random()*0.01,size:2+Math.random()*2}); }}
-function resizeOrbit(){ orbitCanvas.width=window.innerWidth; orbitCanvas.height=window.innerHeight; createOrbit(); }
-window.addEventListener("resize",resizeOrbit);
-resizeOrbit();
-function drawOrbit(){ octx.clearRect(0,0,orbitCanvas.width,orbitCanvas.height); let cx=orbitCanvas.width/2,cy=orbitCanvas.height/2; orbitParticles.forEach(p=>{ p.angle+=p.speed; let x=cx+p.radius*Math.cos(p.angle); let y=cy+p.radius*Math.sin(p.angle)*0.3; octx.beginPath(); octx.arc(x,y,p.size,0,Math.PI*2); octx.fillStyle="rgba(255,255,255,0.7)"; octx.fill(); }); requestAnimationFrame(drawOrbit);}
-drawOrbit();
-
-// Energy Lines
-const energyCanvas=document.getElementById("energy"); const ectx=energyCanvas.getContext("2d"); let lines=[];
-function createEnergy(){ lines=[]; for(let i=0;i<80;i++){ lines.push({ x:(Math.random()*2-1)*energyCanvas.width/2, y:energyCanvas.height/2+Math.random()*300, z:0, speedZ:4+Math.random()*3, speedY:0.6+Math.random()*0.5, color:`hsl(${Math.random()*360},100%,60%)`}); } }
-function resizeEnergy(){ energyCanvas.width=window.innerWidth; energyCanvas.height=window.innerHeight; createEnergy(); }
-window.addEventListener("resize",resizeEnergy);
-resizeEnergy();
-function drawEnergyLines(){ ectx.clearRect(0,0,energyCanvas.width,energyCanvas.height); let cx=energyCanvas.width/2,cy=energyCanvas.height/2; lines.forEach(line=>{ line.z+=line.speedZ; line.y-=line.speedY; let scale=1-line.z/800; if(scale<0){ line.z=0; line.y=cy+Math.random()*300; line.x=(Math.random()*2-1)*energyCanvas.width/2; scale=1; } let x1=cx+line.x*scale; let y1=line.y*scale; let x2=cx,y2=cy-50; const gradient=ectx.createLinearGradient(x1,y1,x2,y2); gradient.addColorStop(0,line.color); gradient.addColorStop(0.5,"rgba(255,255,255,0.6)"); gradient.addColorStop(1,"rgba(0,255,255,0.2)"); ectx.strokeStyle=gradient; ectx.lineWidth=6*scale; ectx.shadowColor=line.color; ectx.shadowBlur=15; ectx.beginPath(); ectx.moveTo(x1,y1); ectx.lineTo(x2,y2); ectx.stroke(); }); requestAnimationFrame(drawEnergyLines);}
-drawEnergyLines();
-
-// Initialize AOS
-AOS.init({ duration:1000, once:true });
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
 <script>
-gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
-// Fade-in & slide-up sections
-gsap.utils.toArray("section").forEach((section, i) => {
-  gsap.from(section, {
-    y: 50,
-    opacity: 0,
-    duration: 1,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: section,
-      start: "top 80%",
-      end: "bottom 60%",
-      toggleActions: "play none none reverse",
-    }
+  // Animated titles
+  const titles = ["Modernizing", "Schools", "Businesses", "Ecommerce"];
+  let tl = gsap.timeline({ repeat:-1, repeatDelay:1 });
+  titles.forEach(title=>{
+    tl.to("#animated-title",{duration:1.5,text:title,ease:"power1.inOut"})
+      .to("#animated-title",{duration:0.5,opacity:0,ease:"power1.inOut"})
+      .to("#animated-title",{duration:0.1,opacity:1});
   });
-});
 
-// Animate service cards individually
-gsap.utils.toArray(".service-card").forEach((card, i) => {
-  gsap.from(card, {
-    y: 30,
-    opacity: 0,
-    scale: 0.95,
-    duration: 0.5,
-    delay: i * 0.01,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: card,
-      start: "top 85%",
-      toggleActions: "play none none reverse",
-    }
+  // Fade-in sections
+  gsap.utils.toArray("section").forEach((section, i) => {
+    gsap.from(section, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        end: "bottom 60%",
+        toggleActions: "play none none reverse",
+      }
+    });
   });
+
+  // Animate service cards individually
+  gsap.utils.toArray(".service-card").forEach((card, i) => {
+    gsap.from(card, {
+      y: 30,
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.5,
+      delay: i * 0.01,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      }
+    });
+  });
+
+  // Parallax for blobs
+  gsap.to(".blob1", { yPercent:-20, xPercent:10, ease:"none", scrollTrigger:{ trigger:"body", start:"top top", end:"bottom bottom", scrub:true } });
+  gsap.to(".blob2", { yPercent:25, xPercent:-15, ease:"none", scrollTrigger:{ trigger:"body", start:"top top", end:"bottom bottom", scrub:true } });
+  gsap.to(".blob3", { yPercent:-15, xPercent:20, ease:"none", scrollTrigger:{ trigger:"body", start:"top top", end:"bottom bottom", scrub:true } });
+
+  // AOS Init
+  AOS.init({ duration:1000, once:true });
+
+  // Corner Quotes
+  const cornerQuotes = ["Responsive Websites","SEO-Optimized Design","E-commerce Solutions","ERP Solutions"];
+  const corners = document.querySelectorAll(".corner-quote");
+  function animateCornerQuotes() {
+    let tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
+    corners.forEach((corner, i) => {
+      tl.to(corner, { duration:0, text: cornerQuotes[i], opacity:0 });
+      tl.to(corner, { opacity:1, duration:1 });
+      tl.to(corner, { opacity:0, duration:1, delay:1 });
+    });
+  }
+  animateCornerQuotes();
+
+  // Show Modules Button
+  document.getElementById("showModulesBtn").addEventListener("click", function() {
+    const moduleSection = document.getElementById("modules-list");
+    const isHidden = moduleSection.classList.contains("d-none");
+    moduleSection.classList.toggle("d-none", !isHidden);
+    this.textContent = isHidden ? "Hide ERP Modules" : "Explore All ERP Modules";
+    if (isHidden) moduleSection.scrollIntoView({ behavior: "smooth" });
+  });
+</script>
+<script>
+// Open modal
+document.getElementById("showModulesBtn").addEventListener("click", () => {
+  document.getElementById("modulesModal").style.display = "flex";
 });
 
-// Parallax effect for background blobs
-gsap.to(".blob1", {
-  yPercent: -20,
-  xPercent: 10,
-  ease: "none",
-  scrollTrigger: {
-    trigger: "body",
-    start: "top top",
-    end: "bottom bottom",
-    scrub: true
-  }
+// Close modal on 'X'
+document.getElementById("closeModules").addEventListener("click", () => {
+  document.getElementById("modulesModal").style.display = "none";
 });
-gsap.to(".blob2", {
-  yPercent: 25,
-  xPercent: -15,
-  ease: "none",
-  scrollTrigger: {
-    trigger: "body",
-    start: "top top",
-    end: "bottom bottom",
-    scrub: true
-  }
+
+// Close when clicking outside content
+window.addEventListener("click", (e) => {
+  const modal = document.getElementById("modulesModal");
+  if (e.target === modal) modal.style.display = "none";
 });
-gsap.to(".blob3", {
-  yPercent: -15,
-  xPercent: 20,
-  ease: "none",
-  scrollTrigger: {
-    trigger: "body",
-    start: "top top",
-    end: "bottom bottom",
-    scrub: true
-  }
+
+// Close with ESC key
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") document.getElementById("modulesModal").style.display = "none";
 });
 </script>
+
 
 
 <script>
-  document.getElementById("showModulesBtn").addEventListener("click", function() {
-    const moduleSection = document.getElementById("modules-list");
-    moduleSection.style.display = moduleSection.style.display === "none" ? "flex" : "none";
-    this.textContent = moduleSection.style.display === "flex" ? "Hide ERP Modules" : "Explore All ERP Modules";
-    if (moduleSection.style.display === "flex") {
-      moduleSection.scrollIntoView({ behavior: "smooth" });
-    }
+document.addEventListener("DOMContentLoaded", function () {
+  const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+  const navbarCollapse = document.querySelector(".navbar-collapse");
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href").substring(1);
+      const targetSection = document.getElementById(targetId);
+
+      // Smooth scroll
+      if (targetSection) {
+        window.scrollTo({
+          top: targetSection.offsetTop - 70, // adjust for fixed navbar height
+          behavior: "smooth"
+        });
+      }
+
+      // Close navbar toggle (for mobile)
+      const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+        toggle: false
+      });
+      bsCollapse.hide();
+    });
   });
+});
 </script>
+
 
 
 </body>
